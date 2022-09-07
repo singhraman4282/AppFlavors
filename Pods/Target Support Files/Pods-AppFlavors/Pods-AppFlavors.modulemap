@@ -1,0 +1,6 @@
+framework module Pods_AppFlavors {
+  umbrella header "Pods-AppFlavors-umbrella.h"
+
+  export *
+  module * { export * }
+}

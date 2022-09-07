@@ -54,19 +54,34 @@ extension ViewController: UITableViewDataSource {
 
 }
 
+
+
+typealias FlavoredAsset = Asset.DCAssets
+
 private struct ViewModel {
     let cellModels: [ImageTableViewCellModel]
+
+    /*
+     Note:
+     When building for Marvel Scheme, Asset.DCAssets.someAsset shows the Marvel version of that asset since that's the file that gets included.
+     It works as expected but it still feels a bit weird.
+
+     One option here would be creating typealiases and compiler flags
+
+     #if DC
+        typealias FlavoredAsset = Asset.DCAssets
+     #else
+        typealias FlavoredAsset = Asset.MarvelAssets
+     #endif
+     */
 
     static let `default`: ViewModel = {
         ViewModel(
             cellModels: [
-                ImageTableViewCellModel(imageName: "app_banner"),
-                ImageTableViewCellModel(imageName: "rich_guy_1"),
-                ImageTableViewCellModel(imageName: "rich_guy_2"),
-                ImageTableViewCellModel(imageName: "flying_man_1"),
-                ImageTableViewCellModel(imageName: "flying_man_2"),
-                ImageTableViewCellModel(imageName: "female_superhero_1"),
-                ImageTableViewCellModel(imageName: "female_superhero_2"),
+                ImageTableViewCellModel(imageAsset: Asset.Assets.appBanner),
+                ImageTableViewCellModel(imageAsset: Asset.DCAssets.richGuy),
+                ImageTableViewCellModel(imageAsset: Asset.DCAssets.flyingMan),
+                ImageTableViewCellModel(imageAsset: Asset.DCAssets.femaleSuperhero),
             ])
     }()
 }
@@ -104,11 +119,11 @@ private final class ImageTableViewCell: UITableViewCell {
     }
 
     func bind(cellModel: ImageTableViewCellModel) {
-        self.mainImageView.image = UIImage(named: cellModel.imageName)
+        self.mainImageView.image = cellModel.imageAsset.image
     }
 }
 
 private struct ImageTableViewCellModel {
     let cellType: UITableViewCell.Type = ImageTableViewCell.self
-    let imageName: String
+    let imageAsset: ImageAsset
 }
