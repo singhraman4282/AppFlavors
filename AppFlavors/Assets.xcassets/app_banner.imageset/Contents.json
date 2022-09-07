@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "funny-superhero-arrogant-face-isolated-over-blue-background-portrait-caucasian-man-shows-his-strength-competence-190963596.jpeg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
