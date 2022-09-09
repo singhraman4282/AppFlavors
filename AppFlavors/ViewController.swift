@@ -54,9 +54,12 @@ extension ViewController: UITableViewDataSource {
 
 }
 
+#if DC
+typealias FlavoredString = L10n.DCLocalizations
+#elseif Marvel
+typealias FlavoredString = L10n.MarvelLocalizations
+#endif
 
-
-typealias FlavoredAsset = Asset.DCAssets
 
 private struct ViewModel {
     let cellModels: [ImageTableViewCellModel]
@@ -79,9 +82,9 @@ private struct ViewModel {
         ViewModel(
             cellModels: [
                 ImageTableViewCellModel(title: L10n.Localizations.App.banner, imageAsset: Asset.Assets.appBanner),
-                ImageTableViewCellModel(title: L10n.DCLocalizations.richMan, imageAsset: Asset.DCAssets.richGuy),
-                ImageTableViewCellModel(title: L10n.DCLocalizations.flyingMan, imageAsset: Asset.DCAssets.flyingMan),
-                ImageTableViewCellModel(title: L10n.DCLocalizations.femaleSuperhero, imageAsset: Asset.DCAssets.femaleSuperhero),
+                ImageTableViewCellModel(title: FlavoredString.richMan, imageAsset: Asset.DCAssets.richGuy),
+                ImageTableViewCellModel(title: FlavoredString.flyingMan, imageAsset: Asset.DCAssets.flyingMan),
+                ImageTableViewCellModel(title: FlavoredString.femaleSuperhero, imageAsset: Asset.DCAssets.femaleSuperhero),
             ])
     }()
 }
