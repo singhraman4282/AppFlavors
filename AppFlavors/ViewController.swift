@@ -54,13 +54,6 @@ extension ViewController: UITableViewDataSource {
 
 }
 
-#if DC
-typealias FlavoredString = L10n.DCLocalizations
-#elseif Marvel
-typealias FlavoredString = L10n.MarvelLocalizations
-#endif
-
-
 private struct ViewModel {
     let cellModels: [ImageTableViewCellModel]
 
@@ -82,14 +75,44 @@ private struct ViewModel {
         ViewModel(
             cellModels: [
                 ImageTableViewCellModel(title: L10n.Localizations.App.banner, imageAsset: Asset.Assets.appBanner),
-                ImageTableViewCellModel(title: FlavoredString.richMan, imageAsset: Asset.DCAssets.richGuy),
-                ImageTableViewCellModel(title: FlavoredString.flyingMan, imageAsset: Asset.DCAssets.flyingMan),
-                ImageTableViewCellModel(title: FlavoredString.femaleSuperhero, imageAsset: Asset.DCAssets.femaleSuperhero),
+                ImageTableViewCellModel(title: L10n.Localizations.richMan, imageAsset: Asset.DCAssets.richGuy),
+                ImageTableViewCellModel(title: L10n.Localizations.flyingMan, imageAsset: Asset.DCAssets.flyingMan),
+                ImageTableViewCellModel(title: L10n.Localizations.femaleSuperhero, imageAsset: Asset.DCAssets.femaleSuperhero),
             ])
     }()
 }
 
+extension L10n.Localizations {
+    static let richMan: String = {
+#if DC
+        L10n.DCLocalizations.richMan
+#elseif Marvel
+        L10n.MarvelLocalizations.richMan
+#else
+        ""
+#endif
+    }()
 
+    static let flyingMan: String = {
+#if DC
+        L10n.DCLocalizations.flyingMan
+#elseif Marvel
+        L10n.MarvelLocalizations.flyingMan
+#else
+        ""
+#endif
+    }()
+
+    static let femaleSuperhero: String = {
+#if DC
+        L10n.DCLocalizations.femaleSuperhero
+#elseif Marvel
+        L10n.MarvelLocalizations.femaleSuperhero
+#else
+        ""
+#endif
+    }()
+}
 
 private final class ImageTableViewCell: UITableViewCell {
 
