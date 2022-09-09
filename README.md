@@ -8,9 +8,11 @@ There are two flavors
 - Marvel
 
 Here's how you view the DC flavor
+---
 In your current scheme, select *DC* as build configuration. Run the app.
 
 Here's how you view the Marvel flavor
+---
 In your current scheme, select *Marvel* as build configuration. Run the app.
 
 
