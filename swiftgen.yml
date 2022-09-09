@@ -14,4 +14,4 @@ strings:
         - AppFlavors/en.lproj/Marvel_Localizations.strings
     outputs:
         - templateName: structured-swift4
-          output: AppFlavors/Strings.swift
+          output: AppFlavors/GeneratedAssets/Strings.swift

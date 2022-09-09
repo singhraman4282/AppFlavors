@@ -426,7 +426,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo Run Forest Run\npwd\n${PODS_ROOT}/SwiftGen/bin/swiftgen\n";
+			shellScript = "echo Run Forest Run\npwd\n${PODS_ROOT}/SwiftGen/bin/swiftgen\n\nPods/Sourcery/bin/sourcery --templates ./Templates/Localizations.swifttemplate --sources AppFlavors/GeneratedAssets/ --output \"./AppFlavors\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
