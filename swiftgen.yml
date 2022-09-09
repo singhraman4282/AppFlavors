@@ -5,7 +5,7 @@ xcassets:
         - AppFlavors/Marvel_Assets.xcassets
     outputs:
         - templateName: swift5
-          output: AppFlavors/Images.swift
+          output: AppFlavors/GeneratedAssets/Images.swift
 
 strings:
     inputs:

@@ -57,60 +57,14 @@ extension ViewController: UITableViewDataSource {
 private struct ViewModel {
     let cellModels: [ImageTableViewCellModel]
 
-    /*
-     Note:
-     When building for Marvel Scheme, Asset.DCAssets.someAsset shows the Marvel version of that asset since that's the file that gets included.
-     It works as expected but it still feels a bit weird.
-
-     One option here would be creating typealiases and compiler flags
-
-     #if DC
-        typealias FlavoredAsset = Asset.DCAssets
-     #else
-        typealias FlavoredAsset = Asset.MarvelAssets
-     #endif
-     */
-
     static let `default`: ViewModel = {
         ViewModel(
             cellModels: [
-                ImageTableViewCellModel(title: L10n.Localizations.App.banner, imageAsset: Asset.Assets.appBanner),
-                ImageTableViewCellModel(title: L10n.Localizations.richMan, imageAsset: Asset.DCAssets.richGuy),
-                ImageTableViewCellModel(title: L10n.Localizations.flyingMan, imageAsset: Asset.DCAssets.flyingMan),
-                ImageTableViewCellModel(title: L10n.Localizations.femaleSuperhero, imageAsset: Asset.DCAssets.femaleSuperhero),
+                ImageTableViewCellModel(title: L10n.Localizations.App.banner, imageAsset: Asset.appBanner),
+                ImageTableViewCellModel(title: L10n.Localizations.richMan, imageAsset: Asset.richGuy),
+                ImageTableViewCellModel(title: L10n.Localizations.flyingMan, imageAsset: Asset.flyingMan),
+                ImageTableViewCellModel(title: L10n.Localizations.femaleSuperhero, imageAsset: Asset.femaleSuperhero),
             ])
-    }()
-}
-
-extension L10n.Localizations {
-    static let richMan: String = {
-#if DC
-        L10n.DCLocalizations.richMan
-#elseif Marvel
-        L10n.MarvelLocalizations.richMan
-#else
-        ""
-#endif
-    }()
-
-    static let flyingMan: String = {
-#if DC
-        L10n.DCLocalizations.flyingMan
-#elseif Marvel
-        L10n.MarvelLocalizations.flyingMan
-#else
-        ""
-#endif
-    }()
-
-    static let femaleSuperhero: String = {
-#if DC
-        L10n.DCLocalizations.femaleSuperhero
-#elseif Marvel
-        L10n.MarvelLocalizations.femaleSuperhero
-#else
-        ""
-#endif
     }()
 }
 

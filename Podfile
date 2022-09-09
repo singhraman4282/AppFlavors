@@ -7,6 +7,7 @@ target 'AppFlavors' do
 
   # Pods for AppFlavors
   pod 'SwiftGen', '~> 6.0'
+  pod 'Sourcery'
 
   target 'AppFlavorsTests' do
     inherit! :search_paths
