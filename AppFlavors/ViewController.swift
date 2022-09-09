@@ -78,10 +78,10 @@ private struct ViewModel {
     static let `default`: ViewModel = {
         ViewModel(
             cellModels: [
-                ImageTableViewCellModel(imageAsset: Asset.Assets.appBanner),
-                ImageTableViewCellModel(imageAsset: Asset.DCAssets.richGuy),
-                ImageTableViewCellModel(imageAsset: Asset.DCAssets.flyingMan),
-                ImageTableViewCellModel(imageAsset: Asset.DCAssets.femaleSuperhero),
+                ImageTableViewCellModel(title: L10n.Localizations.App.banner, imageAsset: Asset.Assets.appBanner),
+                ImageTableViewCellModel(title: L10n.DCLocalizations.richMan, imageAsset: Asset.DCAssets.richGuy),
+                ImageTableViewCellModel(title: L10n.DCLocalizations.flyingMan, imageAsset: Asset.DCAssets.flyingMan),
+                ImageTableViewCellModel(title: L10n.DCLocalizations.femaleSuperhero, imageAsset: Asset.DCAssets.femaleSuperhero),
             ])
     }()
 }
@@ -95,8 +95,17 @@ private final class ImageTableViewCell: UITableViewCell {
     lazy private var mainImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
         return imageView
+    }()
+
+    lazy private var titleLabel: UILabel = {
+        let someLabel = UILabel()
+        someLabel.numberOfLines = 0
+        someLabel.textAlignment = .center
+        someLabel.translatesAutoresizingMaskIntoConstraints = false
+        return someLabel
     }()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -109,21 +118,27 @@ private final class ImageTableViewCell: UITableViewCell {
     }
 
     private func commonInit() {
+        contentView.addSubview(titleLabel)
         contentView.addSubview(mainImageView)
         NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             mainImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             mainImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            mainImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            mainImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
             mainImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 
     func bind(cellModel: ImageTableViewCellModel) {
-        self.mainImageView.image = cellModel.imageAsset.image
+        mainImageView.image = cellModel.imageAsset.image
+        titleLabel.text = cellModel.title
     }
 }
 
 private struct ImageTableViewCellModel {
+    let title: String
     let cellType: UITableViewCell.Type = ImageTableViewCell.self
     let imageAsset: ImageAsset
 }

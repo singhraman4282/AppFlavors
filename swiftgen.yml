@@ -7,3 +7,11 @@ xcassets:
         - templateName: swift5
           output: AppFlavors/Images.swift
 
+strings:
+    inputs:
+        - AppFlavors/en.lproj/Localizations.strings
+        - AppFlavors/en.lproj/DC_Localizations.strings
+        - AppFlavors/en.lproj/Marvel_Localizations.strings
+    outputs:
+        - templateName: structured-swift4
+          output: AppFlavors/Strings.swift
