@@ -3,46 +3,55 @@
 // MARK: Localization
 
 extension L10n.Localizations {
-
-<% for type in types.enums where type.name.contains("DCLocalizations") { -%>
-    <% for variable in type.variables { -%>
-
-    static let <%= variable.name %>: String = {
-#if DC
-        L10n.DCLocalizations.<%= variable.name %>
-#elseif Marvel
-        L10n.MarvelLocalizations.<%= variable.name %>
+<%_ let dcLocalizations = types.enums.first(where: { $0.name.contains("DCLocalizations")}) -%>
+<%_ let marvelLocalizations = types.enums.first(where: { $0.name.contains("MarvelLocalizations")}) -%>
+<%_ let dcLocalizationProperties = dcLocalizations!.variables.map({$0.name}) -%>
+<%_ if dcLocalizationProperties == marvelLocalizations!.variables.map({$0.name}) { -%>
+    <% for property in dcLocalizationProperties { %>
+    static let <%= property %>: String = {
+#if Marvel
+    L10n.MarvelLocalizations.<%= property %>
 #else
-        ""
+    L10n.DCLocalizations.<%= property %>
 #endif
     }()
-<% } -%>
-<% } -%>
+    <% } %>
+<%_ } else { -%>
+    <%_ let dcVariablesSet = Set(dcLocalizationProperties) -%>
+    <%_ let marvelVariablesSet = Set(marvelLocalizations!.variables.map({$0.name})) -%>
+    <%_ let dcUnique = dcVariablesSet.subtracting(marvelVariablesSet) -%>
+    <%_ let marvelUnique = marvelVariablesSet.subtracting(dcVariablesSet) -%>
+    #warning("Please fix below errors before continuing:")
+    <%_ for unique in dcUnique { -%>
+    #error("<%= unique %> is unique to DCLocalizations")
+    <%_ } -%>
+    <%_ for unique in marvelUnique { -%>
+    #error("<%= unique %> is unique to MarvelLocalizations")
+    <%_ } -%>
+<%_ } -%>
 }
 
 // MARK: Image Assets
 
 extension Asset {
-
-<% for type in types.enums where type.name.contains("Asset.") { -%>
-    <% for variable in type.variables { -%>
-        <% if type.name == "Asset.Assets" { -%>
+<%_ for type in types.enums where type.name.contains("Asset.") { -%>
+    <%_ for variable in type.variables { -%>
+        <%_ if type.name == "Asset.Assets" { -%>
 
     static let <%= variable.name %>: ImageAsset = {
         <%= type.name %>.<%= variable.name %>
     }()
-        <% } else if type.name == "Asset.DCAssets" { %>
+        <%_ } else if type.name == "Asset.DCAssets" { -%>
+
     static let <%= variable.name %>: ImageAsset = {
-#if DC
-        Asset.DCAssets.<%= variable.name %>
-#elseif Marvel
+#if Marvel
         Asset.MarvelAssets.<%= variable.name %>
 #else
         Asset.DCAssets.<%= variable.name %>
 #endif
     }()
-        <% } -%>
-    <% } -%>
-<% } -%>
+        <%_ } -%>
+    <%_ } -%>
+<%_ } -%>
 
 }
