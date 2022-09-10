@@ -1,8 +1,16 @@
 
 
-// MARK: Localization
+// MARK: Localizations
 
-extension L10n.Localizations {
+enum Localizations {
+
+// MARK: - Common
+<%_ let sharedLocalizations = types.enums.first(where: { $0.name == "L10n.Localizations"})!.variables.map({$0.name}) -%>
+<% for item in sharedLocalizations { %>
+    static let <%= item -%>: String = L10n.Localizations.<%= item -%>
+<% } %>
+
+// MARK: - Flavors
 <%_ let dcLocalizations = types.enums.first(where: { $0.name.contains("DCLocalizations")}) -%>
 <%_ let marvelLocalizations = types.enums.first(where: { $0.name.contains("MarvelLocalizations")}) -%>
 <%_ let dcLocalizationProperties = dcLocalizations!.variables.map({$0.name}) -%>

@@ -19,10 +19,8 @@ internal enum L10n {
     internal static let richMan = L10n.tr("DC_Localizations", "richMan", fallback: "Batman")
   }
   internal enum Localizations {
-    internal enum App {
-      /// Your superhero team
-      internal static let banner = L10n.tr("Localizations", "app.banner", fallback: "Your superhero team")
-    }
+    /// Your superhero team
+    internal static let appBanner = L10n.tr("Localizations", "appBanner", fallback: "Your superhero team")
   }
   internal enum MarvelLocalizations {
     /// Captain Marvel

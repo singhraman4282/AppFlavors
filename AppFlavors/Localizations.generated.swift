@@ -2,9 +2,15 @@
 // DO NOT EDIT
 
 
-// MARK: Localization
+// MARK: Localizations
 
-extension L10n.Localizations {
+enum Localizations {
+
+// MARK: - Common
+
+    static let appBanner: String = L10n.Localizations.appBanner
+
+// MARK: - Flavors
     
     static let femaleSuperhero: String = {
 #if Marvel
