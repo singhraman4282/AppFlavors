@@ -60,10 +60,10 @@ private struct ViewModel {
     static let `default`: ViewModel = {
         ViewModel(
             cellModels: [
-                ImageTableViewCellModel(title: L10n.Localizations.App.banner, imageAsset: Asset.appBanner),
-                ImageTableViewCellModel(title: L10n.Localizations.richMan, imageAsset: Asset.richGuy),
-                ImageTableViewCellModel(title: L10n.Localizations.flyingMan, imageAsset: Asset.flyingMan),
-                ImageTableViewCellModel(title: L10n.Localizations.femaleSuperhero, imageAsset: Asset.femaleSuperhero),
+                ImageTableViewCellModel(title: Localizations.appBanner, imageAsset: Asset.appBanner),
+                ImageTableViewCellModel(title: Localizations.richMan, imageAsset: Asset.richGuy),
+                ImageTableViewCellModel(title: Localizations.flyingMan, imageAsset: Asset.flyingMan),
+                ImageTableViewCellModel(title: Localizations.femaleSuperhero, imageAsset: Asset.femaleSuperhero),
             ])
     }()
 }

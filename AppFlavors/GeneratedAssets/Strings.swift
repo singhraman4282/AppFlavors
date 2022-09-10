@@ -15,20 +15,22 @@ internal enum L10n {
     internal static let femaleSuperhero = L10n.tr("DC_Localizations", "femaleSuperhero", fallback: "Wonder Woman")
     /// Superman
     internal static let flyingMan = L10n.tr("DC_Localizations", "flyingMan", fallback: "Superman")
+    /// Joker
+    internal static let funnyGuy = L10n.tr("DC_Localizations", "funnyGuy", fallback: "Joker")
     /// Batman
     internal static let richMan = L10n.tr("DC_Localizations", "richMan", fallback: "Batman")
   }
   internal enum Localizations {
-    internal enum App {
-      /// Your superhero team
-      internal static let banner = L10n.tr("Localizations", "app.banner", fallback: "Your superhero team")
-    }
+    /// Your superhero team
+    internal static let appBanner = L10n.tr("Localizations", "appBanner", fallback: "Your superhero team")
   }
   internal enum MarvelLocalizations {
     /// Captain Marvel
     internal static let femaleSuperhero = L10n.tr("Marvel_Localizations", "femaleSuperhero", fallback: "Captain Marvel")
     /// Thor
     internal static let flyingMan = L10n.tr("Marvel_Localizations", "flyingMan", fallback: "Thor")
+    /// The Hulk
+    internal static let greenGuy = L10n.tr("Marvel_Localizations", "greenGuy", fallback: "The Hulk")
     /// Ironman
     internal static let richMan = L10n.tr("Marvel_Localizations", "richMan", fallback: "Ironman")
   }

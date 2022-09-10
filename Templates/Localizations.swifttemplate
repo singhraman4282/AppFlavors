@@ -1,33 +1,36 @@
 
 
-// MARK: Localization
+// MARK: Localizations
 
-extension L10n.Localizations {
-<%_ let dcLocalizations = types.enums.first(where: { $0.name.contains("DCLocalizations")}) -%>
-<%_ let marvelLocalizations = types.enums.first(where: { $0.name.contains("MarvelLocalizations")}) -%>
-<%_ let dcLocalizationProperties = dcLocalizations!.variables.map({$0.name}) -%>
-<%_ if dcLocalizationProperties == marvelLocalizations!.variables.map({$0.name}) { -%>
-    <% for property in dcLocalizationProperties { %>
-    static let <%= property %>: String = {
+struct Localizations {
+
+// MARK: - Common
+<%_ let sharedLocalizations = types.enums.first(where: { $0.name == "L10n.Localizations"})!.variables.map({$0.name}) -%>
+<% for item in sharedLocalizations { %>
+    static let <%= item -%>: String = L10n.Localizations.<%= item -%>
+<% } %>
+
+// MARK: - Flavors
+<% let dcLocalizationProperties = types.enums.first(where: { $0.name.contains("DCLocalizations")})!.variables.map({$0.name}) %>
+<%_ let marvelLocalizationProperties = types.enums.first(where: { $0.name.contains("MarvelLocalizations")})!.variables.map({$0.name}) -%>
+<%_ let combinedProperties = Set(dcLocalizationProperties).union(Set(marvelLocalizationProperties)) -%>
+<%_ for item in combinedProperties { -%>
+    static let <%= item %>: String = {
+    <%_ if dcLocalizationProperties.contains(item) && marvelLocalizationProperties.contains(item) { -%>
 #if Marvel
-    L10n.MarvelLocalizations.<%= property %>
+        L10n.MarvelLocalizations.<%= item %>
 #else
-    L10n.DCLocalizations.<%= property %>
+        L10n.DCLocalizations.<%= item %>
 #endif
+    <%_ } else if dcLocalizationProperties.contains(item) { -%>
+#warning("<%= item %> is unique to DCLocalizations")
+        return L10n.DCLocalizations.<%= item %>
+    <%_ } else { -%>
+#warning("<%= item %> is unique to MarvelLocalizations")
+        return L10n.MarvelLocalizations.<%= item %>
+    <%_ } -%>
     }()
-    <% } %>
-<%_ } else { -%>
-    <%_ let dcVariablesSet = Set(dcLocalizationProperties) -%>
-    <%_ let marvelVariablesSet = Set(marvelLocalizations!.variables.map({$0.name})) -%>
-    <%_ let dcUnique = dcVariablesSet.subtracting(marvelVariablesSet) -%>
-    <%_ let marvelUnique = marvelVariablesSet.subtracting(dcVariablesSet) -%>
-    #warning("Please fix below errors before continuing:")
-    <%_ for unique in dcUnique { -%>
-    #error("<%= unique %> is unique to DCLocalizations")
-    <%_ } -%>
-    <%_ for unique in marvelUnique { -%>
-    #error("<%= unique %> is unique to MarvelLocalizations")
-    <%_ } -%>
+
 <%_ } -%>
 }
 

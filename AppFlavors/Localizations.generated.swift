@@ -2,34 +2,50 @@
 // DO NOT EDIT
 
 
-// MARK: Localization
+// MARK: Localizations
 
-extension L10n.Localizations {
-    
-    static let femaleSuperhero: String = {
-#if Marvel
-    L10n.MarvelLocalizations.femaleSuperhero
-#else
-    L10n.DCLocalizations.femaleSuperhero
-#endif
+struct Localizations {
+
+// MARK: - Common
+
+    static let appBanner: String = L10n.Localizations.appBanner
+
+// MARK: - Flavors
+
+    static let funnyGuy: String = {
+#warning("funnyGuy is unique to DCLocalizations")
+        return L10n.DCLocalizations.funnyGuy
     }()
-    
+
+    static let greenGuy: String = {
+#warning("greenGuy is unique to MarvelLocalizations")
+        return L10n.MarvelLocalizations.greenGuy
+    }()
+
     static let flyingMan: String = {
 #if Marvel
-    L10n.MarvelLocalizations.flyingMan
+        L10n.MarvelLocalizations.flyingMan
 #else
-    L10n.DCLocalizations.flyingMan
+        L10n.DCLocalizations.flyingMan
 #endif
     }()
-    
+
+    static let femaleSuperhero: String = {
+#if Marvel
+        L10n.MarvelLocalizations.femaleSuperhero
+#else
+        L10n.DCLocalizations.femaleSuperhero
+#endif
+    }()
+
     static let richMan: String = {
 #if Marvel
-    L10n.MarvelLocalizations.richMan
+        L10n.MarvelLocalizations.richMan
 #else
-    L10n.DCLocalizations.richMan
+        L10n.DCLocalizations.richMan
 #endif
     }()
-    
+
 }
 
 // MARK: Image Assets
